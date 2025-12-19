@@ -1,32 +1,42 @@
-# trading-sim-cpp-v1
-A minimal C++ trading simulator that models a single buy/sell decision and simulates PnL from a one-day price movement.
+# trading-sim-cpp-v2
+A minimal C++ trading simulator that models trading decisions, portfolio state, and profit & loss (PnL) over multiple simulated days.
+
+Version history and notable changes are documented in CHANGELOG.md.
 
 ## How it works
-- **Entry:** Initial price is fixed at 100.
-- **Action:** User chooses to Buy (long) or Sell (short) and selects a quantity.
-- **Simulation:** The market price randomly moves to either 99 or 101 (50/50 chance).
-- **Result:** Profit or loss (PnL) is calculated based on the position direction.
+- Start with a fixed amount of cash and an initial price
+- Each day: choose Buy, Sell, or Hold
+- Trades update portfolio cash, position, and average entry price
+- Market price evolves via a simple random walk each day
+- Equity is marked to market daily
+- Realized and unrealized PnL are tracked throughout the run
 
 ## Example Run
 ```text
-=== One-Day Trading Simulator (V1) ===
-Current price: 100
-Choose action: (B)uy or (S)ell: B
-Choose quantity (e.g., 1, 5, 10): 10
+=== Multi-Day Trading Simulator (V2) ===
+Starting cash: 10000
+Starting price: 100
+Simulation will run for 5 days
 
---- Result ---
-You BOUGHT 10 @ 100
-End-of-day price: 101
-PnL: 10
-You made money.
+--- Day 1 ---
+Current price: 100
+Cash: 10000
+Position: 0 shares
+Equity: 10000
+Realized PnL: 0
+Unrealized PnL: 0
+
+Choose action: (B)uy, (S)ell, or (H)old: B
+Choose quantity (e.g., 1, 5, 10): 10
+Bought 10 @ 100
 ```
 
 ## Planned Features (WIP)
-- Portfolio, position, and cash tracking (persistent state)
-- Time-based market simulation with daily price evolution
-- Support for multiple assets
-- Interactive and passive simulation modes
-- Order-based execution via a basic order book
+- Multi-asset market simulation
+- Deterministic / configurable market dynamics (seeded runs, drift/vol controls)
+- Order objects and order-based execution
+- Basic order book per asset (limit orders + matching)
+- Risk constraints / realism improvements (e.g., margin rules for shorts)
 
 ## Build & Run
 
