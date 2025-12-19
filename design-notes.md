@@ -2,8 +2,8 @@
 
 ## Project Intent
 This project is a learning-focused trading simulator built incrementally from first principles.
-The goal is to understand the mechanics of trading, price movement, and portfolio evolution
-before introducing more realistic market structures.
+The goal is to understand trading mechanics, portfolio accounting, and time-based market
+simulation before introducing more realistic execution models such as order books.
 
 ---
 
@@ -15,48 +15,48 @@ before introducing more realistic market structures.
 
 ---
 
-## Current Model (V1)
+## Current Model (V2)
 - Single asset
-- Fixed entry price (100)
-- Binary one-day price movement (99 or 101)
-- One trade per simulation
-- No persistent portfolio state
-- PnL computed directly from price change
-
-This version exists to establish a baseline and validate intuition.
+- Fixed initial price
+- Discrete multi-day simulation
+- Persistent portfolio state
+- Daily mark-to-market equity calculation
+- Market price evolves via a simple random walk
+  
+This version establishes correct portfolio accounting and time evolution as a foundation
+for more advanced market structures.
 
 ---
 
 ## Key Design Decisions
 - Discrete time steps instead of continuous time
 - Integer prices for simplicity
-- Minimal user input
-- No order book or execution logic yet
-- Randomness kept simple and interpretable
+- Explicit portfolio accounting (cash, position, equity)
+- Short positions allowed at the accounting level
+- Market dynamics kept simple and interpretable
+- Execution occurs at the observed market price (no order book yet)
 
 ---
 
 ## Planned Directions (High-Level)
 
 ### Portfolio & Accounting
-- Introduce persistent cash and position tracking
-- Mark positions to market daily
-- Track equity and cumulative PnL
+- Add explicit risk constraints (e.g. margin or leverage limits)
+- Improve reporting (equity curve, drawdowns, summary stats)
 
 ### Time Simulation
-- Fixed start date
-- Daily time step loop
-- Ability to step day-by-day or fast-forward
+- Configurable simulation horizon
+- Step-by-step versus fast-forward simulation modes
 
 ### Market Model
 - Multiple assets
-- Independent price evolution per asset
-- Deterministic randomness where possible
+- Configurable and deterministic price dynamics (seeded randomness)
+- Optional shared market shocks for correlation
 
 ### Execution Model
 - Introduce orders as explicit objects
 - Add a basic order book per asset
-- Compare execution-based PnL with price-based PnL
+- Compare execution-based outcomes with price-based outcomes
 
 ---
 
